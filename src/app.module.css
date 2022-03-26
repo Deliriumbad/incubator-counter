@@ -1,0 +1,60 @@
+.wrapper {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 200px;
+    height: 145px;
+    background-color: lightslategrey;
+    border: 2px solid grey;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 2px 2px 5px white inset, 5px 5px 10px black;
+}
+
+.someClass {
+
+}
+
+.app span{
+    color: red;
+}
+
+.inc {
+    margin-right: 10px;
+    border-radius: 5px;
+    background-color: lightsteelblue;
+    width: 50px;
+}
+.inc:hover {
+    background-color: cornflowerblue;
+}
+
+.reset {
+    border-radius: 5px;
+    background-color: lightsteelblue;
+    width: 50px;
+}
+.reset:hover {
+    background-color: cornflowerblue;
+}
+
+.counter {
+    width: 120px;
+    height: 50px;
+    border: solid 2px;
+    margin: 15px 0;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+.counter span {
+   font: 35px bold;
+}
+
+.buttonWrapper {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
