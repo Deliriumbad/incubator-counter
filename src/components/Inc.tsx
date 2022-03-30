@@ -6,12 +6,15 @@ type IncPropsType = {
     count:number
 }
 
-export const Inc = (props:IncPropsType) => {
+export const Inc:React.FC<IncPropsType> = (props) => {
 
     const onClickCountHandler = () => {
         props.counter()
     }
 
-    return <button className={s.inc} disabled={props.count === 5 ? true : false} onClick={onClickCountHandler}>Inc</button>
+    return <button className={s.inc}
+                   disabled={props.count === 5 ? true : false}
+                   onClick={onClickCountHandler}>
+        Inc</button>
 };
 

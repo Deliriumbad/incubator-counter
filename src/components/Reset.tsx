@@ -6,12 +6,15 @@ type ResetPropsType ={
     count:number
 }
 
-export const Reset = (props:ResetPropsType) => {
+export const Reset:React.FC<ResetPropsType> = (props) => {
 
     const onClickResetHandler = () => {
         props.reset()
     }
 
-    return <button className={s.reset} disabled={props.count === 0 ? true : false} onClick={onClickResetHandler}>Reset</button>
+    return <button className={s.reset}
+                   disabled={props.count === 0 ? true : false}
+                   onClick={onClickResetHandler}>
+        Reset</button>
 };
 

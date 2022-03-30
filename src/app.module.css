@@ -2,8 +2,7 @@
     display: flex;
     margin: 0 auto;
     margin-top: 100px;
-    width: 200px;
-    height: 145px;
+    width: 250px;
     background-color: lightslategrey;
     border: 2px solid grey;
     border-radius: 10px;
@@ -21,40 +20,49 @@
     color: red;
 }
 
-.inc {
-    margin-right: 10px;
-    border-radius: 5px;
-    background-color: lightsteelblue;
-    width: 50px;
+.inc Button {
+    margin: 0 5px 20px 5px;
+    width: 90px;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    background-color: grey;
+    font-size: 20px;
+    font-weight: 900;
+    box-shadow: inset 1px 1px 5px white, 2px 2px 5px black
 }
-.inc:hover {
+.inc:hover Button {
     background-color: cornflowerblue;
 }
 
-.reset {
-    border-radius: 5px;
-    background-color: lightsteelblue;
-    width: 50px;
+.reset Button{
+    margin: 0 5px 20px 5px;
+    width: 90px;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    background-color: grey;
+    font-size: 20px;
+    font-weight: 900;
+    box-shadow: inset 1px 1px 5px white, 2px 2px 5px black
 }
-.reset:hover {
+.reset:hover Button{
     background-color: cornflowerblue;
 }
 
 .counter {
-    width: 120px;
-    height: 50px;
-    border: solid 2px;
-    margin: 15px 0;
-    border-radius: 10px;
-    padding-top: 10px;
+    width: 200px;
+    height: 100px;
+    margin: 20px 20px;
+    background-color: gray;
+    font-size: 50px;
+    font-weight: 900;
+    texts-hadow: 1px 1px 2px black;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px inset
 }
 
 .counter span {
-   font: 35px bold;
+   font: 90px bold;
 }
 
-.buttonWrapper {
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 5px;
-}

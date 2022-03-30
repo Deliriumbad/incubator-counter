@@ -5,7 +5,7 @@ type CounterPropsType = {
    count:number
 }
 
-export const Counter = (props:CounterPropsType) => {
+export const Counter:React.FC<CounterPropsType> = (props) => {
     return (
         <div className={s.counter}>
             <span>{props.count}</span>
