@@ -20,7 +20,7 @@
     color: red;
 }
 
-.inc Button {
+.button{
     margin: 0 5px 20px 5px;
     width: 90px;
     height: 40px;
@@ -31,22 +31,7 @@
     font-weight: 900;
     box-shadow: inset 1px 1px 5px white, 2px 2px 5px black
 }
-.inc:hover Button {
-    background-color: cornflowerblue;
-}
-
-.reset Button{
-    margin: 0 5px 20px 5px;
-    width: 90px;
-    height: 40px;
-    border: none;
-    border-radius: 3px;
-    background-color: grey;
-    font-size: 20px;
-    font-weight: 900;
-    box-shadow: inset 1px 1px 5px white, 2px 2px 5px black
-}
-.reset:hover Button{
+.button:hover {
     background-color: cornflowerblue;
 }
 
@@ -55,14 +40,10 @@
     height: 100px;
     margin: 20px 20px;
     background-color: gray;
-    font-size: 50px;
     font-weight: 900;
     texts-hadow: 1px 1px 2px black;
     border-radius: 8px;
-    box-shadow: 2px 2px 5px inset
-}
-
-.counter span {
-   font: 90px bold;
+    box-shadow: 2px 2px 5px inset;
+    font: 90px bold;
 }
 

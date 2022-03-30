@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Counter} from "./components/Counter";
-import {Inc} from "./components/Inc";
-import {Reset} from "./components/Reset";
 import s from './app.module.css'
-import {Button} from "./Button";
-
+import {Button} from "./components/Button";
 
 function App() {
-    const [count, setCount] = useState<number>(0)
+    const [count, setCount] = useState<number>(0);
 
     const maxValue = 5;
     const startValue = 0;
@@ -16,12 +13,12 @@ function App() {
 
     const counter = () => {
         if (count < maxValue) {
-            setCount(count + counterStep)
+            setCount(count + counterStep);
         }
     }
 
     const reset = () => {
-        setCount(startValue)
+        setCount(startValue);
     }
 
     const appClass = count === 5 ? s.app : s.someClass;
@@ -30,26 +27,14 @@ function App() {
         <div className={s.wrapper}>
             <div className={appClass}>
                 <Counter count={count}/>
-                {/*<Inc counter={counter}
-                         count={count}
-                    />
-                    <Reset reset={reset}
-                           count={count}
-                    />*/}
-
-                <span className={s.inc}>
-                        <Button name={'Inc'}
-                                callback={counter}
-                                isDisabled={count === 5 ? true : false}
-                        />
-                    </span>
-
-                <span className={s.reset}>
-                        <Button name={'Reset'}
-                                callback={reset}
-                                isDisabled={count === 0 ? true : false}
-                        />
-                    </span>
+                <Button name={'Inc'}
+                        callback={counter}
+                        isDisabled={count === 5 ? true : false}
+                />
+                <Button name={'Reset'}
+                        callback={reset}
+                        isDisabled={count === 0 ? true : false}
+                />
             </div>
         </div>
     );
