@@ -11,30 +11,33 @@ function App() {
     const startValue = 0;
     const counterStep = 1;
 
-    const counter = () => {
-        if (count < maxValue) {
-            setCount(count + counterStep);
+    const onCounterHandler = (name: string) => {
+        switch (name) {
+            case 'Inc':
+                setCount(count + counterStep);
+                break;
+            case 'Reset':
+                setCount(startValue);
+                break
         }
     }
 
-    const reset = () => {
-        setCount(startValue);
-    }
+    const buttons = [
+        {name: 'Inc', isDisabled: count === maxValue},
+        {name: 'Reset', isDisabled: count === startValue}
+    ]
 
     const appClass = count === 5 ? s.app : s.someClass;
+
+    const button = buttons.map((el, index) => {
+        return <Button key={index} counter={onCounterHandler} {...el} />
+    })
 
     return (
         <div className={s.wrapper}>
             <div className={appClass}>
                 <Counter count={count}/>
-                <Button name={'Inc'}
-                        callback={counter}
-                        isDisabled={count === 5 ? true : false}
-                />
-                <Button name={'Reset'}
-                        callback={reset}
-                        isDisabled={count === 0 ? true : false}
-                />
+                {button}
             </div>
         </div>
     );
