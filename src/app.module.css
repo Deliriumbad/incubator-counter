@@ -1,3 +1,13 @@
+html {
+    width: 100%;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 700px;
+}
+
 .wrapper {
     display: flex;
     margin: 0 auto;
@@ -16,8 +26,8 @@
 
 }
 
-.app span{
-    color: red;
+.white span{
+    color: white;
 }
 
 .button{
@@ -40,10 +50,29 @@
     height: 100px;
     margin: 20px 20px;
     background-color: gray;
-    font-weight: 900;
-    texts-hadow: 1px 1px 2px black;
     border-radius: 8px;
     box-shadow: 2px 2px 5px inset;
     font: 90px bold;
 }
 
+.input {
+    background-color: lightslategrey;
+    width: 60px;
+    height: 25px;
+    margin: 20px 20px;
+    padding: 10px;
+    background-color: gray;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px inset;
+    font: 25px bold;
+    text-align: center;
+}
+
+.counterText {
+    font: 16px bold;
+    color: white;
+}
+
+.red input{
+    background-color: red;
+}

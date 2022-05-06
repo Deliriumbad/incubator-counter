@@ -1,43 +1,114 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./components/Counter";
 import s from './app.module.css'
 import {Button} from "./components/Button";
+import {Input} from "./components/Input";
+import {v1} from 'uuid';
 
 function App() {
-    const [count, setCount] = useState<number>(0);
+    let [startValue, setStartValue] = useState<number>(0);
+    let [maxValue, setMaxValue] = useState<number>(5);
+    let [currentValue, setCurrentValue] = useState<number>(startValue);
+    let [select, setSelect] = useState<boolean>(true);
+    let [counterStatus, setCounterStatus] = useState<string>('');
 
-    const maxValue = 5;
-    const startValue = 0;
     const counterStep = 1;
+
+    const maxInput = v1();
+    const minInput = v1();
+
+    const buttons = [
+        {id: v1(), name: 'Inc', isDisabled: currentValue === maxValue || !select || maxValue<=startValue},
+        {id: v1(), name: 'Reset', isDisabled: currentValue === startValue || !select || maxValue<=startValue},
+    ]
+    const set = [
+        {id: v1(), name: 'Set', isDisabled: select}
+    ]
+
+    const inputs = [
+        {id: maxInput, name: 'Max', value: maxValue},
+        {id: minInput, name: 'Min', value: startValue}
+    ]
+
+    useEffect(() => {
+        const startValueAsString = localStorage.getItem('startValue');
+        startValueAsString && setStartValue(JSON.parse(startValueAsString));
+
+        const maxValueAsString = localStorage.getItem('maxValue');
+        maxValueAsString && setMaxValue(JSON.parse(maxValueAsString));
+
+        const currentValueAsString = localStorage.getItem('currentValue');
+        currentValueAsString && setCurrentValue(JSON.parse(currentValueAsString));
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('startValue', JSON.stringify(startValue));
+        localStorage.setItem('maxValue', JSON.stringify(maxValue));
+        localStorage.setItem('currentValue', JSON.stringify(currentValue));
+    }, [startValue, maxValue, currentValue]);
 
     const onCounterHandler = (name: string) => {
         switch (name) {
             case 'Inc':
-                setCount(count + counterStep);
+                setCurrentValue(currentValue + counterStep);
                 break;
             case 'Reset':
-                setCount(startValue);
-                break
+                setCurrentValue(startValue);
+                break;
+            case 'Set':
+                setCurrentValue(startValue);
+                setMaxValue(maxValue);
+                setSelect(true)
+                setCounterStatus('');
         }
     }
 
-    const buttons = [
-        {name: 'Inc', isDisabled: count === maxValue},
-        {name: 'Reset', isDisabled: count === startValue}
-    ]
+    const onChangeHandler = (num: number, id: string) => {
+        if (id === maxInput) {
+            maxValue = num;
+            setMaxValue(maxValue);
+            setSelect(false);
+            setCounterStatus('Enter values and press "set"');
+        }
+        if (id === minInput) {
+            startValue = num;
+            setStartValue(startValue);
+            setSelect(false);
+            setCounterStatus('Enter values and press "set"');
+        }
+        if (startValue >= maxValue || startValue < 0) {
+            setCounterStatus('Incorrect value!');
+            setSelect(true);
+        }
+    }
 
-    const appClass = count === 5 ? s.app : s.someClass;
+    const colorFont = currentValue === maxValue ? s.white : s.someClass;
+    const colorInput = counterStatus === 'Incorrect value!' ? s.red : s.someClass;
 
     const button = buttons.map((el, index) => {
         return <Button key={index} counter={onCounterHandler} {...el} />
     })
 
+    const setButton = set.map((el, index) => {
+        return <Button key={index} counter={onCounterHandler} {...el} />
+    })
+
+    const input = inputs.map((el, index) => {
+        return <Input key={index} callback={onChangeHandler} {...el} />
+    })
+
     return (
-        <div className={s.wrapper}>
-            <div className={appClass}>
-                <Counter count={count}/>
-                {button}
+        <div className={s.container}>
+            <div className={s.wrapper}>
+                <div className={colorFont}>
+                    <Counter count={currentValue} counterStatus={counterStatus}/>
+                    {button}
+                </div>
+            </div>
+            <div className={`${s.wrapper} ${colorInput}`} >
+                {input}
+                {setButton}
             </div>
         </div>
     );
