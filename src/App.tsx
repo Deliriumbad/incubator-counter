@@ -39,13 +39,21 @@ function App() {
 
         const currentValueAsString = localStorage.getItem('currentValue');
         currentValueAsString && setCurrentValue(JSON.parse(currentValueAsString));
-    }, []);
+
+        const onSwitchModeValueAsString = localStorage.getItem('onSwitchMode');
+        onSwitchModeValueAsString && SetOnSwitchMode(JSON.parse(onSwitchModeValueAsString));
+
+        const counterInfoValueAsString = localStorage.getItem('counterInfo');
+        counterInfoValueAsString && setCounterInfo(JSON.parse(counterInfoValueAsString));
+        }, []);
 
     useEffect(() => {
         localStorage.setItem('startValue', JSON.stringify(startValue));
         localStorage.setItem('maxValue', JSON.stringify(maxValue));
         localStorage.setItem('currentValue', JSON.stringify(currentValue));
-    }, [startValue, maxValue, currentValue]);
+        localStorage.setItem('onSwitchMode', JSON.stringify(onSwitchMode));
+        localStorage.setItem('counterInfo', JSON.stringify(counterInfo));
+    }, [startValue, maxValue, currentValue, onSwitchMode, counterInfo]);
 
     const onCounterHandler = (name: string) => {
         switch (name) {
