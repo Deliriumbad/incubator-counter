@@ -12,8 +12,8 @@ function App() {
     const [currentValue, setCurrentValue] = useState<number>(startValue);
     const [activeButton, setActiveButton] = useState<boolean>(true);
     const [counterInfo, setCounterInfo] = useState<string>('');
-    const [onSwitchMode, SetOnSwitchMode] = useState(false)
-    const [inputMode, setInputMode] = useState(false)
+    const [onSwitchMode, SetOnSwitchMode] = useState(false);
+    const [inputMode, setInputMode] = useState(false);
 
     const counterStep = 1;
 
@@ -143,7 +143,7 @@ function App() {
                                             {input}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={onSwitchMode ? false : activeButton}
+                                                    isDisabled={onSwitchMode ? activeButton: !activeButton}
                                             />
                                         </div>
                                     </div>
