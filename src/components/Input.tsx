@@ -1,7 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import s from '../app.module.css'
 
-
 type InputPropsType = {
     name:string
     value:number
@@ -9,20 +8,22 @@ type InputPropsType = {
     id:string
 }
 
-export const Input = (props:InputPropsType) => {
+export const Input: React.FC<InputPropsType> = (props) => {
+
+    const {name, value, callback, id} = props;
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.callback(Number(e.currentTarget.value), props.id)
+        callback(Number(e.currentTarget.value), id);
     }
 
     return (
         <div>
-            <span>{props.name==='Max' ? 'Set max value' : 'Set min value'}</span>
+            <span>{name==='Max' ? 'Set max value' : 'Set min value'}</span>
             <input type={'number'}
                    className={s.input}
                    onChange={onChangeHandler}
-                   id={props.id}
-                   value={props.value}
+                   id={id}
+                   value={value}
             />
         </div>
     );

@@ -19,12 +19,12 @@ function App() {
     const minInput = v1();
 
     const buttons = [
-        {id: v1(), name: 'Inc', isDisabled: currentValue === maxValue || !select || maxValue<=startValue},
-        {id: v1(), name: 'Reset', isDisabled: currentValue === startValue || !select || maxValue<=startValue},
+        {id: v1(), name: 'Inc', isDisabled: currentValue === maxValue || !select || maxValue <= startValue},
+        {id: v1(), name: 'Reset', isDisabled: currentValue === startValue || !select || maxValue <= startValue},
     ]
-    const set = [
+    /*const set = [
         {id: v1(), name: 'Set', isDisabled: select}
-    ]
+    ]*/
 
     const inputs = [
         {id: maxInput, name: 'Max', value: maxValue},
@@ -61,6 +61,8 @@ function App() {
                 setMaxValue(maxValue);
                 setSelect(true)
                 setCounterStatus('');
+                setInputMode(!inputMode)
+                break;
         }
     }
 
@@ -83,34 +85,89 @@ function App() {
         }
     }
 
-    const colorFont = currentValue === maxValue ? s.white : s.someClass;
-    const colorInput = counterStatus === 'Incorrect value!' ? s.red : s.someClass;
+
+    const colorFont = currentValue === maxValue ? s.white : '';
+    const colorInput = counterStatus === 'Incorrect value!' ? s.red : '';
 
     const button = buttons.map((el, index) => {
         return <Button key={index} counter={onCounterHandler} {...el} />
     })
 
-    const setButton = set.map((el, index) => {
+    /*const setButton = set.map((el, index) => {
         return <Button key={index} counter={onCounterHandler} {...el} />
-    })
+    })*/
 
     const input = inputs.map((el, index) => {
         return <Input key={index} callback={onChangeHandler} {...el} />
     })
 
+    const [on, SetOn] = useState(true)
+
+    const onButtonHandler = () => {
+        SetOn(!on)
+        setInputMode(false)
+    }
+
+    let [inputMode, setInputMode] = useState(false)
+
     return (
-        <div className={s.container}>
-            <div className={s.wrapper}>
-                <div className={colorFont}>
-                    <Counter count={currentValue} counterStatus={counterStatus}/>
-                    {button}
-                </div>
-            </div>
-            <div className={`${s.wrapper} ${colorInput}`} >
-                {input}
-                {setButton}
-            </div>
-        </div>
+        <>
+            <button onClick={onButtonHandler}>Switch mode</button>
+            {
+                on ?
+                    <div className={s.container}>
+                        <div className={s.wrapper}>
+                            <div className={colorFont}>
+                                <Counter count={currentValue}
+                                         counterStatus={counterStatus}
+                                />
+                                {button}
+                            </div>
+                        </div>
+                        <div className={`${s.wrapper} ${colorInput}`}>
+                            {input}
+                            <Button name={'Set'}
+                                    counter={onCounterHandler}
+                                    isDisabled={select}
+                            />
+                        </div>
+                    </div>
+                    :
+                    <div>
+                        <div className={s.container}>
+                            {
+                                inputMode ?
+                                    <div className={s.wrapper}>
+                                        <div className={colorFont}>
+                                            {input}
+                                            <Button name={'Set'}
+                                                    counter={onCounterHandler}
+                                                    isDisabled={!on ? false : select}
+                                                    on={on}
+                                                    inputMode={inputMode}
+                                            />
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className={s.wrapper}>
+                                        <div className={colorFont}>
+                                            <Counter count={currentValue}
+                                                     counterStatus={counterStatus}
+                                            />
+                                            {button}
+                                            <Button name={'Set'}
+                                                    counter={onCounterHandler}
+                                                    isDisabled={!on ? false : select}
+                                                    on={on}
+                                                    inputMode={inputMode}
+                                            />
+                                        </div>
+                                    </div>
+                            }
+                        </div>
+                    </div>
+            }
+        </>
     );
 }
 

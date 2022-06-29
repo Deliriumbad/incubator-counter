@@ -5,20 +5,24 @@ type ButtonPropsType = {
     name: string
     counter: (name: string) => void
     isDisabled: boolean
+    on?:boolean
+    inputMode?:boolean
 }
 
 export const Button: React.FC<ButtonPropsType> = (props) => {
 
+    let {name, counter, isDisabled, on, inputMode} = props;
+
     const onClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        props.counter(e.currentTarget.name);
+        counter(e.currentTarget.name);
     }
     return (
         <button onClick={onClickHandler}
-                disabled={props.isDisabled}
+                disabled={isDisabled}
                 className={s.button}
-                name={props.name}
+                name={name}
         >
-            {props.name}
+            {name}
         </button>
     );
 }
