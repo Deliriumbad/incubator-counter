@@ -9,9 +9,11 @@ import {v1} from 'uuid';
 function App() {
     let [startValue, setStartValue] = useState<number>(0);
     let [maxValue, setMaxValue] = useState<number>(5);
-    let [currentValue, setCurrentValue] = useState<number>(startValue);
-    let [select, setSelect] = useState<boolean>(true);
-    let [counterStatus, setCounterStatus] = useState<string>('');
+    const [currentValue, setCurrentValue] = useState<number>(startValue);
+    const [select, setSelect] = useState<boolean>(true);
+    const [counterStatus, setCounterStatus] = useState<string>('');
+    const [on, SetOn] = useState(true)
+    const [inputMode, setInputMode] = useState(false)
 
     const counterStep = 1;
 
@@ -22,9 +24,6 @@ function App() {
         {id: v1(), name: 'Inc', isDisabled: currentValue === maxValue || !select || maxValue <= startValue},
         {id: v1(), name: 'Reset', isDisabled: currentValue === startValue || !select || maxValue <= startValue},
     ]
-    /*const set = [
-        {id: v1(), name: 'Set', isDisabled: select}
-    ]*/
 
     const inputs = [
         {id: maxInput, name: 'Max', value: maxValue},
@@ -59,9 +58,9 @@ function App() {
             case 'Set':
                 setCurrentValue(startValue);
                 setMaxValue(maxValue);
-                setSelect(true)
+                setSelect(true);
                 setCounterStatus('');
-                setInputMode(!inputMode)
+                setInputMode(!inputMode);
                 break;
         }
     }
@@ -85,7 +84,6 @@ function App() {
         }
     }
 
-
     const colorFont = currentValue === maxValue ? s.white : '';
     const colorInput = counterStatus === 'Incorrect value!' ? s.red : '';
 
@@ -93,22 +91,14 @@ function App() {
         return <Button key={index} counter={onCounterHandler} {...el} />
     })
 
-    /*const setButton = set.map((el, index) => {
-        return <Button key={index} counter={onCounterHandler} {...el} />
-    })*/
-
     const input = inputs.map((el, index) => {
         return <Input key={index} callback={onChangeHandler} {...el} />
     })
-
-    const [on, SetOn] = useState(true)
 
     const onButtonHandler = () => {
         SetOn(!on)
         setInputMode(false)
     }
-
-    let [inputMode, setInputMode] = useState(false)
 
     return (
         <>
@@ -138,13 +128,11 @@ function App() {
                             {
                                 inputMode ?
                                     <div className={s.wrapper}>
-                                        <div className={colorFont}>
+                                        <div className={`${colorFont} ${colorInput}`}>
                                             {input}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
                                                     isDisabled={!on ? false : select}
-                                                    on={on}
-                                                    inputMode={inputMode}
                                             />
                                         </div>
                                     </div>
@@ -158,8 +146,6 @@ function App() {
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
                                                     isDisabled={!on ? false : select}
-                                                    on={on}
-                                                    inputMode={inputMode}
                                             />
                                         </div>
                                     </div>
