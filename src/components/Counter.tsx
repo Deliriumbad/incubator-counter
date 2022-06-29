@@ -3,23 +3,30 @@ import s from './../app.module.css'
 
 type CounterPropsType = {
     count: number
-    counterStatus: string
+    counterInfo: string
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
 
-    if (props.counterStatus === '') {
-        return <div className={s.counter}>
-            <span>{props.count}</span>
-        </div>
-    } else {
-        return <div className={s.counter}>
-            <span className={s.counterText}>{props.counterStatus}</span>
-        </div>
-    }
+    const {count, counterInfo} = props;
 
-
-
-
+    return (
+        <>
+            {
+                !counterInfo ?
+                    <div className={s.counter}>
+                        <span>
+                            {count}
+                        </span>
+                    </div>
+                    :
+                    <div className={s.counter}>
+                        <span className={s.counterText}>
+                            {counterInfo}
+                        </span>
+                    </div>
+            }
+        </>
+    );
 };
 

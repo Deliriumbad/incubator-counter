@@ -22,10 +22,6 @@ html {
     box-shadow: 2px 2px 5px white inset, 5px 5px 10px black;
 }
 
-.someClass {
-
-}
-
 .white span{
     color: white;
 }
@@ -43,6 +39,30 @@ html {
 }
 .button:hover {
     background-color: cornflowerblue;
+}
+
+.switchButtonOff {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    background-color: grey;
+    font-size: 20px;
+    font-weight: 900;
+    box-shadow: inset 1px 1px 5px white, 2px 2px 5px black
+}
+
+.switchButtonOff:hover {
+    background-color: cornflowerblue;
+}
+
+.switchButtonOn {
+    background-color:cornflowerblue;
 }
 
 .counter {

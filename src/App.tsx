@@ -10,24 +10,24 @@ function App() {
     let [startValue, setStartValue] = useState<number>(0);
     let [maxValue, setMaxValue] = useState<number>(5);
     const [currentValue, setCurrentValue] = useState<number>(startValue);
-    const [select, setSelect] = useState<boolean>(true);
-    const [counterStatus, setCounterStatus] = useState<string>('');
-    const [on, SetOn] = useState(true)
+    const [activeButton, setActiveButton] = useState<boolean>(true);
+    const [counterInfo, setCounterInfo] = useState<string>('');
+    const [onSwitchMode, SetOnSwitchMode] = useState(true)
     const [inputMode, setInputMode] = useState(false)
 
     const counterStep = 1;
 
-    const maxInput = v1();
-    const minInput = v1();
+    const maxInputValue = v1();
+    const minInputValue = v1();
 
     const buttons = [
-        {id: v1(), name: 'Inc', isDisabled: currentValue === maxValue || !select || maxValue <= startValue},
-        {id: v1(), name: 'Reset', isDisabled: currentValue === startValue || !select || maxValue <= startValue},
+        {id: v1(), name: 'Inc', isDisabled: currentValue === maxValue || !activeButton || maxValue <= startValue},
+        {id: v1(), name: 'Reset', isDisabled: currentValue === startValue || !activeButton || maxValue <= startValue},
     ]
 
     const inputs = [
-        {id: maxInput, name: 'Max', value: maxValue},
-        {id: minInput, name: 'Min', value: startValue}
+        {id: maxInputValue, name: 'Max', value: maxValue},
+        {id: minInputValue, name: 'Min', value: startValue}
     ]
 
     useEffect(() => {
@@ -58,34 +58,36 @@ function App() {
             case 'Set':
                 setCurrentValue(startValue);
                 setMaxValue(maxValue);
-                setSelect(true);
-                setCounterStatus('');
+                setActiveButton(true);
+                setCounterInfo('');
                 setInputMode(!inputMode);
                 break;
         }
     }
 
     const onChangeHandler = (num: number, id: string) => {
-        if (id === maxInput) {
+        if (id === maxInputValue) {
             maxValue = num;
             setMaxValue(maxValue);
-            setSelect(false);
-            setCounterStatus('Enter values and press "set"');
+            setActiveButton(false);
+            setCounterInfo('Enter values and press "set"');
         }
-        if (id === minInput) {
+        if (id === minInputValue) {
             startValue = num;
             setStartValue(startValue);
-            setSelect(false);
-            setCounterStatus('Enter values and press "set"');
+            setActiveButton(false);
+            setCounterInfo('Enter values and press "set"');
         }
         if (startValue >= maxValue || startValue < 0) {
-            setCounterStatus('Incorrect value!');
-            setSelect(true);
+            setCounterInfo('Incorrect value!');
+            setActiveButton(true);
         }
     }
 
-    const colorFont = currentValue === maxValue ? s.white : '';
-    const colorInput = counterStatus === 'Incorrect value!' ? s.red : '';
+    const fontStyle = currentValue === maxValue ? s.white : '';
+    const inputStyle = counterInfo === 'Incorrect value!' ? s.red : '';
+    const switchButtonStyle = onSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
+
 
     const button = buttons.map((el, index) => {
         return <Button key={index} counter={onCounterHandler} {...el} />
@@ -96,29 +98,29 @@ function App() {
     })
 
     const onButtonHandler = () => {
-        SetOn(!on)
-        setInputMode(false)
+        SetOnSwitchMode(!onSwitchMode);
+        setInputMode(false);
     }
 
     return (
         <>
-            <button onClick={onButtonHandler}>Switch mode</button>
+            <button onClick={onButtonHandler} className={switchButtonStyle}>Switch mode</button>
             {
-                on ?
+                onSwitchMode ?
                     <div className={s.container}>
                         <div className={s.wrapper}>
-                            <div className={colorFont}>
+                            <div className={fontStyle}>
                                 <Counter count={currentValue}
-                                         counterStatus={counterStatus}
+                                         counterInfo={counterInfo}
                                 />
                                 {button}
                             </div>
                         </div>
-                        <div className={`${s.wrapper} ${colorInput}`}>
+                        <div className={`${s.wrapper} ${inputStyle}`}>
                             {input}
                             <Button name={'Set'}
                                     counter={onCounterHandler}
-                                    isDisabled={select}
+                                    isDisabled={activeButton}
                             />
                         </div>
                     </div>
@@ -128,24 +130,24 @@ function App() {
                             {
                                 inputMode ?
                                     <div className={s.wrapper}>
-                                        <div className={`${colorFont} ${colorInput}`}>
+                                        <div className={`${fontStyle} ${inputStyle}`}>
                                             {input}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={!on ? false : select}
+                                                    isDisabled={!onSwitchMode ? false : activeButton}
                                             />
                                         </div>
                                     </div>
                                     :
                                     <div className={s.wrapper}>
-                                        <div className={colorFont}>
+                                        <div className={fontStyle}>
                                             <Counter count={currentValue}
-                                                     counterStatus={counterStatus}
+                                                     counterInfo={counterInfo}
                                             />
                                             {button}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={!on ? false : select}
+                                                    isDisabled={!onSwitchMode ? false : activeButton}
                                             />
                                         </div>
                                     </div>
