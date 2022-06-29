@@ -156,7 +156,7 @@ function App() {
                                             {button}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={onSwitchMode ? false : activeButton}
+                                                    isDisabled={onSwitchMode ? !activeButton: activeButton}
                                             />
                                         </div>
                                     </div>
