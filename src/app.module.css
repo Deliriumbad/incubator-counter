@@ -62,7 +62,11 @@ html {
 }
 
 .switchButtonOn {
-    background-color:cornflowerblue;
+    background-color: cornflowerblue;
+}
+
+.switchButtonOn:hover {
+    background-color: grey;
 }
 
 .counter {

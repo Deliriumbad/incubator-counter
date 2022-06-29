@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./components/Counter";
-import s from './app.module.css'
+import s from './app.module.css';
 import {Button} from "./components/Button";
 import {Input} from "./components/Input";
 import {v1} from 'uuid';
@@ -12,7 +12,7 @@ function App() {
     const [currentValue, setCurrentValue] = useState<number>(startValue);
     const [activeButton, setActiveButton] = useState<boolean>(true);
     const [counterInfo, setCounterInfo] = useState<string>('');
-    const [onSwitchMode, SetOnSwitchMode] = useState(true)
+    const [onSwitchMode, SetOnSwitchMode] = useState(false)
     const [inputMode, setInputMode] = useState(false)
 
     const counterStep = 1;
@@ -86,16 +86,17 @@ function App() {
 
     const fontStyle = currentValue === maxValue ? s.white : '';
     const inputStyle = counterInfo === 'Incorrect value!' ? s.red : '';
-    const switchButtonStyle = onSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
+    const switchButtonStyle = !onSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
+    const switchMode = !onSwitchMode ? 'Switcher is off' : 'Switcher is on';
 
 
     const button = buttons.map((el, index) => {
         return <Button key={index} counter={onCounterHandler} {...el} />
-    })
+    });
 
     const input = inputs.map((el, index) => {
         return <Input key={index} callback={onChangeHandler} {...el} />
-    })
+    });
 
     const onButtonHandler = () => {
         SetOnSwitchMode(!onSwitchMode);
@@ -104,9 +105,9 @@ function App() {
 
     return (
         <>
-            <button onClick={onButtonHandler} className={switchButtonStyle}>Switch mode</button>
+            <button onClick={onButtonHandler} className={switchButtonStyle}>{switchMode}</button>
             {
-                onSwitchMode ?
+                !onSwitchMode ?
                     <div className={s.container}>
                         <div className={s.wrapper}>
                             <div className={fontStyle}>
