@@ -135,7 +135,7 @@ function App() {
                                             {input}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={!onSwitchMode ? false : activeButton}
+                                                    isDisabled={onSwitchMode ? false : activeButton}
                                             />
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@ function App() {
                                             {button}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={!onSwitchMode ? false : activeButton}
+                                                    isDisabled={onSwitchMode ? false : activeButton}
                                             />
                                         </div>
                                     </div>
