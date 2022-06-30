@@ -76,7 +76,8 @@ html {
     background-color: gray;
     border-radius: 8px;
     box-shadow: 2px 2px 5px inset;
-    font: 90px bold;
+    font-size: 90px;
+    font-family: bold;
 }
 
 .input {
@@ -88,7 +89,8 @@ html {
     background-color: gray;
     border-radius: 8px;
     box-shadow: 2px 2px 5px inset;
-    font: 25px bold;
+    font-size: 25px;
+    font-family: bold;
     text-align: center;
 }
 
