@@ -18,7 +18,7 @@ export const Input: React.FC<InputPropsType> = (props) => {
 
     return (
         <div>
-            <span>{name==='Max' ? 'Set max value' : 'Set min value'}</span>
+            <span>{name === 'Max' ? 'Set max value' : 'Set min value'}</span>
             <input type={'number'}
                    className={s.input}
                    onChange={onChangeHandler}

@@ -21,14 +21,35 @@ function App() {
     const minInputValue = v1();
 
     const buttons = [
-        {id: v1(), name: 'Inc', isDisabled: currentValue === maxValue || !activeButton || maxValue <= startValue},
-        {id: v1(), name: 'Reset', isDisabled: currentValue === startValue || !activeButton || maxValue <= startValue},
+        {
+            id: v1(),
+            name: 'Inc',
+            isDisabled: currentValue === maxValue || !activeButton || maxValue <= startValue
+        },
+        {
+            id: v1(),
+            name: 'Reset',
+            isDisabled: currentValue === startValue || !activeButton || maxValue <= startValue
+        },
     ]
 
     const inputs = [
-        {id: maxInputValue, name: 'Max', value: maxValue},
-        {id: minInputValue, name: 'Min', value: startValue}
+        {
+            id: maxInputValue,
+            name: 'Max',
+            value: maxValue
+        },
+        {
+            id: minInputValue,
+            name: 'Min',
+            value: startValue
+        }
     ]
+
+    const fontStyle = currentValue === maxValue ? s.white : '';
+    const inputStyle = counterInfo === 'Incorrect value!' ? s.red : '';
+    const switchButtonStyle = !onSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
+    const switchMode = !onSwitchMode ? 'Switcher is off' : 'Switcher is on';
 
     useEffect(() => {
         const startValueAsString = localStorage.getItem('startValue');
@@ -92,12 +113,6 @@ function App() {
         }
     }
 
-    const fontStyle = currentValue === maxValue ? s.white : '';
-    const inputStyle = counterInfo === 'Incorrect value!' ? s.red : '';
-    const switchButtonStyle = !onSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
-    const switchMode = !onSwitchMode ? 'Switcher is off' : 'Switcher is on';
-
-
     const button = buttons.map((el, index) => {
         return <Button key={index} counter={onCounterHandler} {...el} />
     });
@@ -137,17 +152,7 @@ function App() {
                     <div>
                         <div className={s.container}>
                             {
-                                inputMode ?
-                                    <div className={s.wrapper}>
-                                        <div className={`${fontStyle} ${inputStyle}`}>
-                                            {input}
-                                            <Button name={'Set'}
-                                                    counter={onCounterHandler}
-                                                    isDisabled={onSwitchMode ? activeButton: !activeButton}
-                                            />
-                                        </div>
-                                    </div>
-                                    :
+                                !inputMode ?
                                     <div className={s.wrapper}>
                                         <div className={fontStyle}>
                                             <Counter count={currentValue}
@@ -160,6 +165,17 @@ function App() {
                                             />
                                         </div>
                                     </div>
+                                    :
+                                    <div className={s.wrapper}>
+                                        <div className={`${fontStyle} ${inputStyle}`}>
+                                            {input}
+                                            <Button name={'Set'}
+                                                    counter={onCounterHandler}
+                                                    isDisabled={onSwitchMode ? activeButton: !activeButton}
+                                            />
+                                        </div>
+                                    </div>
+
                             }
                         </div>
                     </div>
