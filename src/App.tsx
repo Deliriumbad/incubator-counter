@@ -125,6 +125,7 @@ function App() {
     return (
         <>
             <button onClick={onButtonHandler} className={switchButtonStyle}>{switchMode}</button>
+
             {
                 !onSwitchMode ?
                     <div className={s.container}>
