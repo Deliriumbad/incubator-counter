@@ -6,9 +6,9 @@ type CounterPropsType = {
     counterInfo: string
 }
 
-export const Counter: React.FC<CounterPropsType> = (props) => {
+export const Counter: React.FC<CounterPropsType> = ( {count, counterInfo}) => {
 
-    const {count, counterInfo} = props;
+    // const {count, counterInfo} = props;
 
     return (
         <>

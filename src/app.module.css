@@ -1,17 +1,18 @@
-html {
-    width: 100%;
+html{
+    background-color: lightslategrey;
+    display: flex;
+    justify-content: center;
 }
+
 .container {
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
-    width: 700px;
 }
 
 .wrapper {
     display: flex;
     margin: 0 auto;
-    margin-top: 100px;
+    margin: 50px 30px;
     width: 250px;
     background-color: lightslategrey;
     border: 2px solid grey;
@@ -46,7 +47,7 @@ html {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
     width: 200px;
     height: 40px;
     border: none;
@@ -102,4 +103,19 @@ html {
 
 .red input{
     background-color: red;
+}
+
+@media only all and (max-width: 600px){
+    .container {
+        flex-direction: column;
+    }
+
+    .wrapper{
+        margin: 15px;
+    }
+
+    .switchButtonOff{
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
 }

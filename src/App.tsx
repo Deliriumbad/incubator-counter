@@ -63,7 +63,7 @@ function App() {
 
         const onSwitchModeValueAsString = localStorage.getItem('onSwitchMode');
         onSwitchModeValueAsString && SetOnSwitchMode(JSON.parse(onSwitchModeValueAsString));
-        }, []);
+    }, []);
 
     useEffect(() => {
         localStorage.setItem('startValue', JSON.stringify(startValue));
