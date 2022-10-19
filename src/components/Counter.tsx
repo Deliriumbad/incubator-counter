@@ -13,16 +13,16 @@ export const Counter: React.FC<CounterPropsType> = ( {count, counterInfo}) => {
     return (
         <>
             {
-                !counterInfo ?
+                counterInfo ?
                     <div className={s.counter}>
-                        <span>
-                            {count}
+                        <span className={s.counterText}>
+                            {counterInfo}
                         </span>
                     </div>
                     :
                     <div className={s.counter}>
-                        <span className={s.counterText}>
-                            {counterInfo}
+                        <span>
+                            {count}
                         </span>
                     </div>
             }

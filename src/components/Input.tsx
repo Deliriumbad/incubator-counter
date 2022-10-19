@@ -4,7 +4,7 @@ import s from '../app.module.css'
 type InputPropsType = {
     name:string
     value:number
-    callback: (min: number, id:string) => void
+    callback: (num: number, id:string) => void
     id:string
 }
 
@@ -22,7 +22,6 @@ export const Input: React.FC<InputPropsType> = (props) => {
             <input type={'number'}
                    className={s.input}
                    onChange={onChangeHandler}
-                   id={id}
                    value={value}
             />
         </div>
