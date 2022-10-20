@@ -1,21 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {Counter} from "./components/Counter";
-import s from './app.module.css';
-import {Button} from "./components/Button";
-import {Input} from "./components/Input";
+import {Counter} from "./components/counter/Counter";
+import style from './app.module.css';
+import {Button} from "./components/button/Button";
+import {Input} from "./components/input/Input";
 import {v1} from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./store";
+import {AppRootStateType} from "./state/store";
 import {
     increaseValueAC,
-    resetValueAC, setActiveButtonAC,
+    resetValueAC,
+    setActiveButtonAC,
     setCounterInfoAC,
     setInputModeAC,
     setMaxValueAC,
     setMinValueAC,
     setSwitchModeAC
-} from "./counterReducer";
+} from "./state/counterReducer";
 
 function AppWithRedux() {
 
@@ -63,9 +64,9 @@ function AppWithRedux() {
         }
     ]
 
-    const fontStyle = currentValue === maxValue ? s.white : '';
-    const inputStyle = counterInfo === 'Incorrect value!' ? s.red : '';
-    const switchButtonStyle = !isOnSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
+    const fontStyle = currentValue === maxValue ? style.white : '';
+    const inputStyle = counterInfo === 'Incorrect value!' ? style.red : '';
+    const switchButtonStyle = !isOnSwitchMode ? style.switchButtonOff : `${style.switchButtonOff} ${style.switchButtonOn}`;
     const switchMode = !isOnSwitchMode ? 'Switcher is off' : 'Switcher is on';
 
     /*  useEffect(() => {
@@ -147,22 +148,22 @@ function AppWithRedux() {
 
             {
                 !isOnSwitchMode ?
-                    <div className={s.container}>
-                        <div className={`${s.wrapper} ${fontStyle}`}>
+                    <div className={style.container}>
+                        <div className={`${style.wrapper} ${fontStyle}`}>
                             <Counter count={currentValue} counterInfo={counterInfo}/>
                             {button}
                         </div>
-                        <div className={`${s.wrapper} ${inputStyle}`}>
+                        <div className={`${style.wrapper} ${inputStyle}`}>
                             {input}
                             <Button name={'Set'} counter={onCounterHandler} isDisabled={isActiveButton}/>
                         </div>
                     </div>
                     :
                     <div>
-                        <div className={s.container}>
+                        <div className={style.container}>
                             {
                                 !isOnInputMode ?
-                                    <div className={`${s.wrapper} ${fontStyle}`}>
+                                    <div className={`${style.wrapper} ${fontStyle}`}>
                                         <Counter count={currentValue} counterInfo={counterInfo}/>
                                         {button}
                                         <Button name={'Set'}
@@ -171,7 +172,7 @@ function AppWithRedux() {
                                         />
                                     </div>
                                     :
-                                    <div className={s.wrapper}>
+                                    <div className={style.wrapper}>
                                         <div className={`${fontStyle} ${inputStyle}`}>
                                             {input}
                                             <Button name={'Set'}

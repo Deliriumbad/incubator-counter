@@ -1,5 +1,5 @@
 import React from "react";
-import s from '../app.module.css'
+import style from './Button.module.css'
 
 type ButtonPropsType = {
     name: string
@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonPropsType> = (props) => {
     return (
         <button onClick={onClickHandler}
                 disabled={isDisabled}
-                className={s.button}
+                className={style.button}
                 name={name}
         >
             {name}

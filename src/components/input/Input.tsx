@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import s from '../app.module.css'
+import style from './Input.module.css'
 
 type InputPropsType = {
     name:string
@@ -20,7 +20,7 @@ export const Input: React.FC<InputPropsType> = (props) => {
         <div>
             <span>{name === 'Max' ? 'Set max value' : 'Set min value'}</span>
             <input type={'number'}
-                   className={s.input}
+                   className={style.input}
                    onChange={onChangeHandler}
                    value={value}
             />

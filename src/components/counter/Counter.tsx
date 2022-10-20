@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './../app.module.css'
+import style from './Counter.module.css'
 
 type CounterPropsType = {
     count: number
@@ -14,13 +14,13 @@ export const Counter: React.FC<CounterPropsType> = ( {count, counterInfo}) => {
         <>
             {
                 counterInfo ?
-                    <div className={s.counter}>
-                        <span className={s.counterText}>
+                    <div className={style.counter}>
+                        <span className={style.counterText}>
                             {counterInfo}
                         </span>
                     </div>
                     :
-                    <div className={s.counter}>
+                    <div className={style.counter}>
                         <span>
                             {count}
                         </span>
