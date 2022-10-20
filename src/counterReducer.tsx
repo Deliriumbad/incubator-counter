@@ -1,12 +1,12 @@
-type actionType =
-    ReturnType<typeof setMinValueAC> |
-    ReturnType<typeof setMaxValueAC> |
-    ReturnType<typeof increaseValueAC> |
-    ReturnType<typeof setCounterInfoAC> |
-    ReturnType<typeof resetValueAC> |
-    ReturnType<typeof setInputModeAC> |
-    ReturnType<typeof setSwitchModeAC> |
-    ReturnType<typeof setActiveButtonAC>
+type ActionType =
+    | ReturnType<typeof setMinValueAC>
+    | ReturnType<typeof setMaxValueAC>
+    | ReturnType<typeof increaseValueAC>
+    | ReturnType<typeof setCounterInfoAC>
+    | ReturnType<typeof resetValueAC>
+    | ReturnType<typeof setInputModeAC>
+    | ReturnType<typeof setSwitchModeAC>
+    | ReturnType<typeof setActiveButtonAC>
 
 const initState = {
     minValue: 0,
@@ -17,11 +17,10 @@ const initState = {
     isOnSwitchMode: false,
     isActiveButton: true
 };
+
 type InitStateType = typeof initState;
 
-
-export const counterReducer = (state: InitStateType = initState, action: actionType): InitStateType => {
-
+export const counterReducer = (state: InitStateType = initState, action: ActionType): InitStateType => {
     switch (action.type) {
         case 'SET-MIN-VALUE':
             return {...state, minValue: action.minValue}

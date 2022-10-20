@@ -29,8 +29,6 @@ function AppWithRedux() {
 
     const dispatch = useDispatch();
 
-    //const [activeButton, setActiveButton] = useState<boolean>(true);
-
     const counterStep = 1;
 
     const maxInputValueId = v1();
@@ -38,7 +36,6 @@ function AppWithRedux() {
 
     const incButtonDisabledMode = currentValue === maxValue || !isActiveButton || maxValue <= minValue;
     const resetButtonDisabledMode = currentValue === minValue || !isActiveButton || maxValue <= minValue;
-
 
     const buttons = [
         {
@@ -71,27 +68,26 @@ function AppWithRedux() {
     const switchButtonStyle = !isOnSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
     const switchMode = !isOnSwitchMode ? 'Switcher is off' : 'Switcher is on';
 
-  /*  useEffect(() => {
-        const startValueAsString = localStorage.getItem('startValue');
-        startValueAsString && setStartValue(JSON.parse(startValueAsString));
+    /*  useEffect(() => {
+          const startValueAsString = localStorage.getItem('startValue');
+          startValueAsString && setStartValue(JSON.parse(startValueAsString));
 
-        const maxValueAsString = localStorage.getItem('maxValue');
-        maxValueAsString && setMaxValue(JSON.parse(maxValueAsString));
+          const maxValueAsString = localStorage.getItem('maxValue');
+          maxValueAsString && setMaxValue(JSON.parse(maxValueAsString));
 
-        const currentValueAsString = localStorage.getItem('currentValue');
-        currentValueAsString && setCurrentValue(JSON.parse(currentValueAsString));
+          const currentValueAsString = localStorage.getItem('currentValue');
+          currentValueAsString && setCurrentValue(JSON.parse(currentValueAsString));
 
-        const onSwitchModeValueAsString = localStorage.getItem('onSwitchMode');
-        onSwitchModeValueAsString && SetOnSwitchMode(JSON.parse(onSwitchModeValueAsString));
-    }, []);
+          const onSwitchModeValueAsString = localStorage.getItem('onSwitchMode');
+          onSwitchModeValueAsString && SetOnSwitchMode(JSON.parse(onSwitchModeValueAsString));
+      }, []);
 
-    useEffect(() => {
-        localStorage.setItem('startValue', JSON.stringify(startValue));
-        localStorage.setItem('maxValue', JSON.stringify(maxValue));
-        localStorage.setItem('currentValue', JSON.stringify(currentValue));
-        localStorage.setItem('onSwitchMode', JSON.stringify(onSwitchMode));
-    }, [startValue, maxValue, currentValue, onSwitchMode]);*/
-
+      useEffect(() => {
+          localStorage.setItem('startValue', JSON.stringify(startValue));
+          localStorage.setItem('maxValue', JSON.stringify(maxValue));
+          localStorage.setItem('currentValue', JSON.stringify(currentValue));
+          localStorage.setItem('onSwitchMode', JSON.stringify(onSwitchMode));
+      }, [startValue, maxValue, currentValue, onSwitchMode]);*/
 
     const onCounterHandler = (name: string) => {
         switch (name) {
@@ -125,12 +121,12 @@ function AppWithRedux() {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (minValue >= maxValue || minValue < 0) {
             dispatch(setCounterInfoAC('Incorrect value!'));
             dispatch(setActiveButtonAC(true));
         }
-    },[minValue, maxValue])
+    }, [minValue, maxValue])
 
     const button = buttons.map((el, index) => {
         return <Button key={index} counter={onCounterHandler} {...el} />
@@ -152,20 +148,13 @@ function AppWithRedux() {
             {
                 !isOnSwitchMode ?
                     <div className={s.container}>
-                        <div className={s.wrapper}>
-                            <div className={fontStyle}>
-                                <Counter count={currentValue}
-                                         counterInfo={counterInfo}
-                                />
-                                {button}
-                            </div>
+                        <div className={`${s.wrapper} ${fontStyle}`}>
+                            <Counter count={currentValue} counterInfo={counterInfo}/>
+                            {button}
                         </div>
                         <div className={`${s.wrapper} ${inputStyle}`}>
                             {input}
-                            <Button name={'Set'}
-                                    counter={onCounterHandler}
-                                    isDisabled={isActiveButton}
-                            />
+                            <Button name={'Set'} counter={onCounterHandler} isDisabled={isActiveButton}/>
                         </div>
                     </div>
                     :
@@ -173,17 +162,13 @@ function AppWithRedux() {
                         <div className={s.container}>
                             {
                                 !isOnInputMode ?
-                                    <div className={s.wrapper}>
-                                        <div className={fontStyle}>
-                                            <Counter count={currentValue}
-                                                     counterInfo={counterInfo}
-                                            />
-                                            {button}
-                                            <Button name={'Set'}
-                                                    counter={onCounterHandler}
-                                                    isDisabled={isOnSwitchMode ? !isActiveButton : isActiveButton}
-                                            />
-                                        </div>
+                                    <div className={`${s.wrapper} ${fontStyle}`}>
+                                        <Counter count={currentValue} counterInfo={counterInfo}/>
+                                        {button}
+                                        <Button name={'Set'}
+                                                counter={onCounterHandler}
+                                                isDisabled={isOnSwitchMode ? !isActiveButton : isActiveButton}
+                                        />
                                     </div>
                                     :
                                     <div className={s.wrapper}>
