@@ -162,7 +162,7 @@ function AppWithRedux() {
                     <div>
                         <div className={style.container}>
                             {
-                                !isOnInputMode ?
+                                isOnInputMode ?
                                     <div className={`${style.wrapper} ${fontStyle}`}>
                                         <Counter count={currentValue} counterInfo={counterInfo}/>
                                         {button}

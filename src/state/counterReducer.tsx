@@ -8,7 +8,7 @@ type ActionType =
     | ReturnType<typeof setSwitchModeAC>
     | ReturnType<typeof setActiveButtonAC>
 
-const initState = {
+export const initState = {
     minValue: 0,
     currentValue: 0,
     maxValue: 5,
@@ -18,7 +18,7 @@ const initState = {
     isActiveButton: true
 };
 
-type InitStateType = typeof initState;
+export type InitStateType = typeof initState;
 
 export const counterReducer = (state: InitStateType = initState, action: ActionType): InitStateType => {
     switch (action.type) {
