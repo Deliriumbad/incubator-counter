@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
 import {
     increaseValueAC,
-    resetValueAC,
+    resetValueAC, setActiveButtonAC,
     setCounterInfoAC,
     setInputModeAC,
     setMaxValueAC,
@@ -25,19 +25,19 @@ function AppWithRedux() {
     const counterInfo = useSelector<AppRootStateType, string>(state => state.counter.counterInfo);
     const isOnInputMode = useSelector<AppRootStateType, boolean>(state => state.counter.isOnInputMode);
     const isOnSwitchMode = useSelector<AppRootStateType, boolean>(state => state.counter.isOnSwitchMode);
-    //const isActiveButton = useSelector<AppRootStateType, boolean>(state => state.counter.isActiveButton);
+    const isActiveButton = useSelector<AppRootStateType, boolean>(state => state.counter.isActiveButton);
 
     const dispatch = useDispatch();
 
-    const [activeButton, setActiveButton] = useState<boolean>(true);
+    //const [activeButton, setActiveButton] = useState<boolean>(true);
 
     const counterStep = 1;
 
     const maxInputValueId = v1();
     const minInputValueId = v1();
 
-    const incButtonDisabledMode = currentValue === maxValue || !activeButton || maxValue <= minValue;
-    const resetButtonDisabledMode = currentValue === minValue || !activeButton || maxValue <= minValue;
+    const incButtonDisabledMode = currentValue === maxValue || !isActiveButton || maxValue <= minValue;
+    const resetButtonDisabledMode = currentValue === minValue || !isActiveButton || maxValue <= minValue;
 
 
     const buttons = [
@@ -71,7 +71,7 @@ function AppWithRedux() {
     const switchButtonStyle = !isOnSwitchMode ? s.switchButtonOff : `${s.switchButtonOff} ${s.switchButtonOn}`;
     const switchMode = !isOnSwitchMode ? 'Switcher is off' : 'Switcher is on';
 
-    /*useEffect(() => {
+  /*  useEffect(() => {
         const startValueAsString = localStorage.getItem('startValue');
         startValueAsString && setStartValue(JSON.parse(startValueAsString));
 
@@ -105,31 +105,30 @@ function AppWithRedux() {
                 dispatch(increaseValueAC());
                 dispatch(setMaxValueAC(maxValue));
                 dispatch(setCounterInfoAC());
-                setActiveButton(true);
+                dispatch(setActiveButtonAC(true));
                 dispatch(setInputModeAC());
                 break;
         }
     }
 
-
     const onChangeHandler = (currentInputValue: number, inputId: string) => {
         if (inputId === minInputValueId) {
+            dispatch(setActiveButtonAC(false));
             dispatch(setMinValueAC(currentInputValue));
-            setActiveButton(false);
             dispatch(setCounterInfoAC('Enter values and press "set"'));
         }
 
         if (inputId === maxInputValueId) {
+            dispatch(setActiveButtonAC(false));
             dispatch(setMaxValueAC(currentInputValue));
-            setActiveButton(false);
             dispatch(setCounterInfoAC('Enter values and press "set"'));
         }
     }
 
     useEffect(()=>{
         if (minValue >= maxValue || minValue < 0) {
-            setActiveButton(true);
             dispatch(setCounterInfoAC('Incorrect value!'));
+            dispatch(setActiveButtonAC(true));
         }
     },[minValue, maxValue])
 
@@ -165,7 +164,7 @@ function AppWithRedux() {
                             {input}
                             <Button name={'Set'}
                                     counter={onCounterHandler}
-                                    isDisabled={activeButton}
+                                    isDisabled={isActiveButton}
                             />
                         </div>
                     </div>
@@ -182,7 +181,7 @@ function AppWithRedux() {
                                             {button}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={isOnSwitchMode ? !activeButton : activeButton}
+                                                    isDisabled={isOnSwitchMode ? !isActiveButton : isActiveButton}
                                             />
                                         </div>
                                     </div>
@@ -192,7 +191,7 @@ function AppWithRedux() {
                                             {input}
                                             <Button name={'Set'}
                                                     counter={onCounterHandler}
-                                                    isDisabled={isOnSwitchMode ? activeButton : !activeButton}
+                                                    isDisabled={isOnSwitchMode ? isActiveButton : !isActiveButton}
                                             />
                                         </div>
                                     </div>

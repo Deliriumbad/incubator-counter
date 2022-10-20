@@ -44,10 +44,7 @@ export const counterReducer = (state: InitStateType = initState, action: actionT
         case 'SET-SWITCH-MODE':
             return {...state, isOnSwitchMode: !state.isOnSwitchMode}
         case 'SET-ACTIVE-BUTTON':
-            if (action.isActiveButton) {
-                return {...state, isActiveButton: !action.isActiveButton}
-            }
-            return {...state, isActiveButton: state.isActiveButton}
+                return {...state, isActiveButton: action.isActiveButton}
         default:
             return state
     }
@@ -60,4 +57,4 @@ export const resetValueAC = () => ({type: 'RESET-VALUE'} as const);
 export const setCounterInfoAC = (counterInfo?: string) => ({type: 'SET-COUNTER-INFO', counterInfo} as const);
 export const setInputModeAC = () => ({type: 'SET-INPUT-MODE'} as const);
 export const setSwitchModeAC = () => ({type: 'SET-SWITCH-MODE'} as const);
-export const setActiveButtonAC = (isActiveButton?:boolean) => ({type: 'SET-ACTIVE-BUTTON', isActiveButton} as const);
+export const setActiveButtonAC = (isActiveButton:boolean) => ({type: 'SET-ACTIVE-BUTTON', isActiveButton} as const);
