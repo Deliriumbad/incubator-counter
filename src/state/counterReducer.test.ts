@@ -7,7 +7,7 @@ import {
     setSwitchModeAC
 } from './counterReducer'
 
-let startState: InitStateType = {
+const startState: InitStateType = {
     minValue: 0,
     currentValue: 0,
     maxValue: 5,

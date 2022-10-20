@@ -18,7 +18,7 @@ import {
     setSwitchModeAC
 } from "./state/counterReducer";
 
-function AppWithRedux() {
+export const AppWithRedux = () => {
 
     const minValue = useSelector<AppRootStateType, number>(state => state.counter.minValue);
     const maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue);
@@ -69,26 +69,6 @@ function AppWithRedux() {
     const switchButtonStyle = !isOnSwitchMode ? style.switchButtonOff : `${style.switchButtonOff} ${style.switchButtonOn}`;
     const switchMode = !isOnSwitchMode ? 'Switcher is off' : 'Switcher is on';
 
-    /*  useEffect(() => {
-          const startValueAsString = localStorage.getItem('startValue');
-          startValueAsString && setStartValue(JSON.parse(startValueAsString));
-
-          const maxValueAsString = localStorage.getItem('maxValue');
-          maxValueAsString && setMaxValue(JSON.parse(maxValueAsString));
-
-          const currentValueAsString = localStorage.getItem('currentValue');
-          currentValueAsString && setCurrentValue(JSON.parse(currentValueAsString));
-
-          const onSwitchModeValueAsString = localStorage.getItem('onSwitchMode');
-          onSwitchModeValueAsString && SetOnSwitchMode(JSON.parse(onSwitchModeValueAsString));
-      }, []);
-
-      useEffect(() => {
-          localStorage.setItem('startValue', JSON.stringify(startValue));
-          localStorage.setItem('maxValue', JSON.stringify(maxValue));
-          localStorage.setItem('currentValue', JSON.stringify(currentValue));
-          localStorage.setItem('onSwitchMode', JSON.stringify(onSwitchMode));
-      }, [startValue, maxValue, currentValue, onSwitchMode]);*/
 
     const onCounterHandler = (name: string) => {
         switch (name) {
@@ -189,5 +169,3 @@ function AppWithRedux() {
         </>
     );
 }
-
-export default AppWithRedux;

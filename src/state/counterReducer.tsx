@@ -8,7 +8,7 @@ type ActionType =
     | ReturnType<typeof setSwitchModeAC>
     | ReturnType<typeof setActiveButtonAC>
 
-export const initState = {
+const initState = {
     minValue: 0,
     currentValue: 0,
     maxValue: 5,
