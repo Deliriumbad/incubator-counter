@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import './App.css';
 import {Counter} from "./components/counter/Counter";
 import style from './app.module.css';
 import {Button} from "./components/button/Button";
